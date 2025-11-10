@@ -1,0 +1,172 @@
+[
+  {
+    "category_name": "Vegetables",
+    "parent_attribute": "Color",
+    "child_attributes": "Red,Green,Yellow,White,Orange,Purple,Brown"
+  },
+  {
+    "category_name": "Vegetables",
+    "parent_attribute": "Test",
+    "child_attributes": "Sweet, Tangy, Spicy, Bitter,"
+  },
+  {
+    "category_name": "Vegetables",
+    "parent_attribute": "Size",
+    "child_attributes": "Large, Medium,Small"
+  },
+  {
+    "category_name": "Fruits",
+    "parent_attribute": "Color",
+    "child_attributes": "Red,Green,Yellow,White, Blue,Orange,Black,Golden, Pink"
+  },
+  {
+    "category_name": "Fruits",
+    "parent_attribute": "Test",
+    "child_attributes": "Sweet, Sour, Crisp, Juicy"
+  },
+  {
+    "category_name": "Fruits",
+    "parent_attribute": "Size",
+    "child_attributes": "Large, Medium,Small"
+  },
+  {
+    "category_name": "Fruits",
+    "parent_attribute": "Type",
+    "child_attributes": "Raw, Ripe, Semi-ripe,Dry"
+  },
+  {
+    "category_name": "Dairy",
+    "parent_attribute": "Color",
+    "child_attributes": "Yellow,White,Creamy,"
+  },
+  {
+    "category_name": "Dairy",
+    "parent_attribute": "Test",
+    "child_attributes": "Sweet, Sour,Mild,Fruity,Salty,Aromatic"
+  },
+  {
+    "category_name": "Dairy",
+    "parent_attribute": "Size",
+    "child_attributes": "Large, Medium,Small"
+  },
+  {
+    "category_name": "Eggs",
+    "parent_attribute": "Color",
+    "child_attributes": "Brown, White, Blue-Green, Speckled"
+  },
+  {
+    "category_name": "Eggs",
+    "parent_attribute": "Size",
+    "child_attributes": "Medium, Small"
+  },
+  {
+    "category_name": "Breads",
+    "parent_attribute": "Color",
+    "child_attributes": "White,Brown,Golden Crust,Dark Rye,Charcoal"
+  },
+  {
+    "category_name": "Breads",
+    "parent_attribute": "Test",
+    "child_attributes": "Sweet, Plain,Savory,Sour,Nutty,Buttery,Herby,"
+  },
+  {
+    "category_name": "Breads",
+    "parent_attribute": "Size",
+    "child_attributes": "Medium,Small"
+  },
+  {
+    "category_name": "Bakery",
+    "parent_attribute": "Color",
+    "child_attributes": "White,Brown,Golden ,Dark Brown,Chocolate, Pink,Blueberry"
+  },
+  {
+    "category_name": "Bakery",
+    "parent_attribute": "Test",
+    "child_attributes": "Sweet, Fruity, Chocolate,Buttery,Tangy,Vanilla"
+  },
+  {
+    "category_name": "Bakery",
+    "parent_attribute": "Size",
+    "child_attributes": "Large, Medium,Small"
+  },
+  {
+    "category_name": "Meat",
+    "parent_attribute": "Color",
+    "child_attributes": "Red, Dark Red, White,Brown"
+  },
+  {
+    "category_name": "Meat",
+    "parent_attribute": "Type",
+    "child_attributes": "Frozen, Fresh"
+  },
+  {
+    "category_name": "Seafood",
+    "parent_attribute": "Color",
+    "child_attributes": "White, Red, Orange,Brown,Black, Grey"
+  },
+  {
+    "category_name": "Seafood",
+    "parent_attribute": "Type",
+    "child_attributes": "Frozen, Fresh"
+  },
+  {
+    "category_name": "Masalas",
+    "parent_attribute": "Color",
+    "child_attributes": "Yellow, Golden, Brown,Pale Green,Red,Dark Brown,Black"
+  },
+  {
+    "category_name": "Masalas",
+    "parent_attribute": "Test",
+    "child_attributes": "Spicy, Hot,Aromatic,Bitter,Pungent,Sweet"
+  },
+  {
+    "category_name": "Masalas",
+    "parent_attribute": "Size",
+    "child_attributes": "Medium,Small"
+  },
+  {
+    "category_name": "Masalas",
+    "parent_attribute": "Type",
+    "child_attributes": "Dry, Raw, Powder"
+  },
+  {
+    "category_name": "Spices",
+    "parent_attribute": "Color",
+    "child_attributes": "Yellow, Golden, Brown,Pale Green,Red,Dark Brown,Black"
+  },
+  {
+    "category_name": "Spices",
+    "parent_attribute": "Test",
+    "child_attributes": "Spicy, Hot,Aromatic,Bitter,Pungent,Sweet"
+  },
+  {
+    "category_name": "Spices",
+    "parent_attribute": "Size",
+    "child_attributes": "Large, Medium,Small"
+  },
+  {
+    "category_name": "Spices",
+    "parent_attribute": "Type",
+    "child_attributes": "Dry, Raw, Powder"
+  },
+  {
+    "category_name": "Breverages",
+    "parent_attribute": "Color",
+    "child_attributes": "Yellow,Orange,Dark Brown, Black,Chocolate,Pink, Green, Purple,Red,Blue"
+  },
+  {
+    "category_name": "Breverages",
+    "parent_attribute": "Test",
+    "child_attributes": "Sweet, Tangy, Juicy,Fruity, Citrusy,Milky, Chocolate, Vanilla,Caramel,Mild"
+  },
+  {
+    "category_name": "Breverages",
+    "parent_attribute": "Size",
+    "child_attributes": "Large, Medium,Small"
+  },
+  {
+    "category_name": "Breverages",
+    "parent_attribute": "Type",
+    "child_attributes": "Organic, Natural,Health,Sugar-Free, Fermented, Energy, Alcoholic"
+  }
+]

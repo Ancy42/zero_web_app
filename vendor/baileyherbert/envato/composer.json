@@ -1,0 +1,38 @@
+{
+    "name": "baileyherbert/envato",
+    "description": "Client library for the Envato API that supports Personal Tokens and OAuth.",
+    "type": "library",
+    "keywords": ["envato", "envato api", "envato v3", "envato market", "envato oauth"],
+    "homepage": "https://bailey.sh/",
+    "version": "3.1.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bailey Herbert",
+            "email": "hello@bailey.sh",
+            "homepage": "https://bailey.sh/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "^6.0 || ^7.0"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.2.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Herbert\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Herbert\\Tests\\Envato\\": "tests/"
+        }
+    },
+    "archive": {
+        "exclude": [
+            "/stubs"
+        ]
+    }
+}

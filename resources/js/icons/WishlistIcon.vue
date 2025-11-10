@@ -1,0 +1,33 @@
+<template>
+    <svg
+        :width="width"
+        :height="height"
+        :class="colorClass"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+    >
+        <path
+            d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM16.675 11.952C16.054 15.155 12 17 12 17C12 17 7.94595 15.155 7.32495 11.952C6.94395 9.98703 7.77604 8.01 9.89404 8C11.471 7.992 12 9.58197 12 9.58197C12 9.58197 12.529 7.992 14.106 8C16.228 8.01 17.056 9.98703 16.675 11.952Z"
+            fill="#4086E1"
+            :class="colorClass"
+        />
+    </svg>
+</template>
+
+<script setup>
+const props = defineProps({
+    colorClass: {
+        type: String,
+        default: "fill-primary",
+    },
+    width: {
+        type: String,
+        default: "24",
+    },
+    height: {
+        type: String,
+        default: "24",
+    },
+});
+</script>

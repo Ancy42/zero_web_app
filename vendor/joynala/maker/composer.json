@@ -1,0 +1,30 @@
+{
+    "name": "joynala/maker",
+    "description": "This is a laravel repository generator.",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Abedin\\Maker\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "authors": [
+        {
+            "name": "Joynal Abedin",
+            "email": "abedin.dev@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Abedin\\Maker\\Providers\\MakerServiceProvider"
+            ]
+        }
+    }
+}

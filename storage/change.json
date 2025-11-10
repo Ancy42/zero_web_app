@@ -1,0 +1,54 @@
+[
+    {
+        "version": "1.1.0",
+        "date": "01 November 2025",
+        "notes": [
+            "fix conditional statement for enabling addon based on verification status",
+            "Version and changelog update notice added",
+            "Improved error handling during addon status update",
+            "Enhanced user feedback on addon status change in admin panel",
+            "resolve migration down codes",
+            "Fix PrimeCart Theme Offer section display issue on mobile devices",
+            "Fix UltraMart Footer, HeroBanner, ProductDetails, top rated shop & message page UI issues"
+        ]
+    },
+    {
+        "version": "1.0.2",
+        "date": "18 October 2025",
+        "notes": [
+            "Permalink added and implemented on website",
+            "Optimized payment and checkout flow logic",
+            "Resolved minor code bugs",
+            "Removed unnecessary codes from footer",
+            "Optimized product view page on frontend",
+            "Fixed live view 404 issue from admin side"
+        ]
+    },
+    {
+        "version": "1.0.1",
+        "date": "14 October 2025",
+        "notes": [
+            "New Feature",
+            "PayPal payment gateway added",
+            "Improvements",
+            "Other payment gateways optimized and cleaned",
+            "Improved responsiveness and UI across all 3 themes",
+            "Bug Fixes",
+            "Resolved seller registration issue",
+            "Resolved seller panel 500 status code issue",
+            "Resolved cart and checkout minor issues"
+        ]
+    },
+    {
+        "version": "1.0.0",
+        "date": "25 September 2025",
+        "notes": [
+            "Flutter Mobile App with Web Admin – Official Launch",
+            "Full dashboard for web and mobile",
+            "Vendor and product management",
+            "Order management",
+            "Basic wallet & payment integration",
+            "Role-based access control"
+        ]
+    }
+]

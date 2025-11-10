@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Ready Mart",
+        "email": "shop@readygrocery.com",
+        "password": "secret@123",
+        "logo": "Ready Mart Logo.png",
+        "banner": "Ready Mart.jpg",
+        "phone": "+8801711001100"
+    },
+    {
+        "name": "Urban Harvest",
+        "email": "farmhousemarket@hotmail.com",
+        "password": "secret@123",
+        "logo": "Urban-Harvest-Logo.png",
+        "banner": "Urban Harvest.jpg",
+        "phone": "+8801711001101"
+    },
+    {
+        "name": "Farmhouse Market",
+        "email": "farmhousemarket@gmail.com",
+        "password": "secret@123",
+        "logo": "Farmhouse-Market Logo.png",
+        "banner": "Farmhouse Market.jpg",
+        "phone": "+8801711001102"
+    }
+]
