@@ -32,7 +32,9 @@
                                     :src="shop?.logo"
                                     loading="lazy"
                                     class="w-full h-full object-cover"
-                                /><pre>{{ shop }}</pre>
+                                />
+                                
+                                <pre>{{ shop }}</pre>
 
                             </div>
 
