@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header-title', __('Welcome Bac,') . ' ' . Str::limit(auth()->user()?->name, 20))
+@section('header-title', __('Welcome Bacc,') . ' ' . Str::limit(auth()->user()?->name, 20))
 @section('header-subtitle', __('Monitor your business analytics and statistics.'))
 
 @section('content')
