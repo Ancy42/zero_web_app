@@ -33,9 +33,6 @@
                                     loading="lazy"
                                     class="w-full h-full object-cover"
                                 />
-                                
-                                <pre>{{ shop }}</pre>
-
                             </div>
 
                             <div class="flex flex-col items-start gap-2">
