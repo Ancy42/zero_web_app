@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hiztcssz/hi.zerobuy.in/
+    - /bin/cp -R * $DEPLOYPATH
