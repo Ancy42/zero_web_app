@@ -81,7 +81,7 @@ class ForgotPasswordController extends Controller
                     $responseMessage = 'Unknown error';
                 }
                 // $responseMessage = 'Your '.$messageType.' code is sent to your phone';
-                // $responseMessage = json_encode($response);
+                $responseMessage = json_encode($response);
                 $emailOrPhone = $phoneCode . $user->phone;
             } elseif ($user->email) {
                 try {
