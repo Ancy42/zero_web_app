@@ -54,6 +54,7 @@ class ForgotPasswordController extends Controller
                 try {
                     $phoneNumber = $user->phone;
                     $phoneCode = $request->phone_code ?? $user->phone_code;
+
                     $curl = curl_init();
                     $data = [
                         "key" => "y7SxblQysDYH0gZMyxoRPRMDzz39kekB",
@@ -65,22 +66,41 @@ class ForgotPasswordController extends Controller
                             ]
                         ]
                     ];
+
                     curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://thesmsbuddy.com/api/v1/rcs/send",
+                        CURLOPT_URL => "https://thesmsbuddy.com/api/v1/sms/send", // ✅ Corrected
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_CUSTOMREQUEST => "POST",
                         CURLOPT_POSTFIELDS => json_encode($data),
                         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
+                        CURLOPT_SSL_VERIFYPEER => false, // Optional, only for localhost
                     ]);
+
                     $response1 = curl_exec($curl);
+                    $curlError = curl_error($curl);
                     curl_close($curl);
-                    $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
+
+                    if ($curlError) {
+                        // \Log::error('TheSMSBuddy CURL Error: ' . $curlError);
+                        $responseMessage = json_encode(['status' => 'error', 'message' => $curlError]);
+                    } else {
+                        $decoded = json_decode($response1, true);
+                        if (isset($decoded['status']) && $decoded['status'] === 'success') {
+                            $responseMessage = 'OTP sent successfully';
+                        } else {
+                            $responseMessage = $decoded['response'] ?? 'SMS sending failed';
+                        }
+                    }
 
                     // dd($response);
                 } catch (\Throwable $e) {
                 }
-                $responseMessage = json_encode($response1);
+
+                // $responseMessage = json_encode($response1);
                 $emailOrPhone = $phoneCode . $user->phone;
+
+                // $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
+
             } elseif ($user->email) {
                 try {
                     SendOTPMail::dispatch($user->email, $message, $OTP);
