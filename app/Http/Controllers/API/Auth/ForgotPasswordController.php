@@ -69,19 +69,10 @@ class ForgotPasswordController extends Controller
                     $response = curl_exec($ch);
                     curl_close($ch);
 
-                    $decoded = json_decode($response, true);
-                    if (isset($decoded['status']) && $decoded['status'] === 'success') {
-                        $responseMessage = 'Your ' . $messageType . ' code is sent to your phone';
-                        // $responseMessage = "OTP sent successfully ✅";
-                    } else {
-                        $responseMessage = "API Error: " . ($decoded['response'] ?? 'Unknown error');
-                    }
                     // dd($response);
                 } catch (\Throwable $e) {
-                    $responseMessage = 'Unknown error';
                 }
-                // $responseMessage = 'Your '.$messageType.' code is sent to your phone';
-                $responseMessage = json_encode($response);
+                $responseMessage = 'Your ' . $messageType . ' code is sent to your phone';
                 $emailOrPhone = $phoneCode . $user->phone;
             } elseif ($user->email) {
                 try {
