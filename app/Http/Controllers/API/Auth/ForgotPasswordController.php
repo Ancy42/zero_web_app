@@ -68,27 +68,35 @@ class ForgotPasswordController extends Controller
                     ];
 
                     curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://thesmsbuddy.com/api/v1/sms/send", // ✅ Corrected
+                        CURLOPT_URL => "https://thesmsbuddy.com/api/v1/sms/send", // ✅ SMS endpoint
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_CUSTOMREQUEST => "POST",
                         CURLOPT_POSTFIELDS => json_encode($data),
                         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-                        CURLOPT_SSL_VERIFYPEER => false, // Optional, only for localhost
+                        CURLOPT_SSL_VERIFYPEER => false, // optional for localhost
+                        CURLOPT_TIMEOUT => 30,
                     ]);
 
-                    $response1 = curl_exec($curl);
+                    $response = curl_exec($curl);
                     $curlError = curl_error($curl);
+                    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                     curl_close($curl);
 
+                    // Log everything
+                    // \Log::info('TheSMSBuddy HTTP Code: ' . $httpCode);
+                    // \Log::info('TheSMSBuddy Raw Response: ' . $response);
+                    // \Log::error('TheSMSBuddy CURL Error: ' . $curlError);
+
                     if ($curlError) {
-                        // \Log::error('TheSMSBuddy CURL Error: ' . $curlError);
-                        $responseMessage = json_encode(['status' => 'error', 'message' => $curlError]);
+                        $responseMessage = "Curl error: " . $curlError;
+                    } elseif ($httpCode >= 400) {
+                        $responseMessage = "HTTP error code: " . $httpCode;
                     } else {
-                        $decoded = json_decode($response1, true);
+                        $decoded = json_decode($response, true);
                         if (isset($decoded['status']) && $decoded['status'] === 'success') {
-                            $responseMessage = 'OTP sent successfully';
+                            $responseMessage = "OTP sent successfully ✅";
                         } else {
-                            $responseMessage = $decoded['response'] ?? 'SMS sending failed';
+                            $responseMessage = "API returned error: " . ($decoded['response'] ?? 'Unknown error');
                         }
                     }
 
