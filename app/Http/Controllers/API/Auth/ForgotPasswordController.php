@@ -55,60 +55,26 @@ class ForgotPasswordController extends Controller
                     $phoneNumber = $user->phone;
                     $phoneCode = $request->phone_code ?? $user->phone_code;
 
-                    $curl = curl_init();
-                    $data = [
-                        "key" => "y7SxblQysDYH0gZMyxoRPRMDzz39kekB",
-                        "to" => strval($phoneNumber),
-                        "type" => "basic",
-                        "data" => [
-                            "content" => [
-                                "plainText" => $message
-                            ]
-                        ]
-                    ];
+                    // $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
 
-                    curl_setopt_array($curl, [
-                        CURLOPT_URL => "https://thesmsbuddy.com/api/v1/sms/send", // ✅ SMS endpoint
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_CUSTOMREQUEST => "POST",
-                        CURLOPT_POSTFIELDS => json_encode($data),
-                        CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-                        CURLOPT_SSL_VERIFYPEER => false, // optional for localhost
-                        CURLOPT_TIMEOUT => 30,
-                    ]);
+                    $sms_content = 'OTP for Login on DREAMPOOL is ' . $phoneCode . ' and valid till 5 minutes. Do not share this OTP to anyone for security reasons. -Dreampool';
 
-                    $response = curl_exec($curl);
-                    $curlError = curl_error($curl);
-                    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                    curl_close($curl);
-
-                    // Log everything
-                    // \Log::info('TheSMSBuddy HTTP Code: ' . $httpCode);
-                    // \Log::info('TheSMSBuddy Raw Response: ' . $response);
-                    // \Log::error('TheSMSBuddy CURL Error: ' . $curlError);
-
-                    if ($curlError) {
-                        $responseMessage = "Curl error: " . $curlError;
-                    } elseif ($httpCode >= 400) {
-                        $responseMessage = "HTTP error code: " . $httpCode;
-                    } else {
-                        $decoded = json_decode($response, true);
-                        if (isset($decoded['status']) && $decoded['status'] === 'success') {
-                            $responseMessage = "OTP sent successfully ✅";
-                        } else {
-                            $responseMessage = "API returned error: " . ($decoded['response'] ?? 'Unknown error');
-                        }
-                    }
+                    $url1 = 'thesmsbuddy.com/api/v1/sms/send?key=y7SxblQysDYH0gZMyxoRPRMDzz39kekB&type=1&to=' . $phoneNumber . '&sender=DRPOOL&message=' . urlencode($sms_content) . '&flash=0&template_id=1707169199056277087';
+                    $response = '';
+                    $ch = curl_init();
+                    curl_setopt_array($ch, array(
+                        CURLOPT_RETURNTRANSFER => 1,
+                        CURLOPT_URL => $url1
+                    ));
+                    $response = curl_exec($ch);
+                    curl_close($ch);
 
                     // dd($response);
                 } catch (\Throwable $e) {
                 }
-
-                // $responseMessage = json_encode($response1);
+                // $responseMessage = 'Your '.$messageType.' code is sent to your phone';
+                $responseMessage = json_encode($response);
                 $emailOrPhone = $phoneCode . $user->phone;
-
-                // $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
-
             } elseif ($user->email) {
                 try {
                     SendOTPMail::dispatch($user->email, $message, $OTP);
@@ -188,30 +154,4 @@ class ForgotPasswordController extends Controller
 
         return $this->json('Password reset successfully');
     }
-
-    // public function sendotp($phone, $msg)
-    // {
-    //     $curl = curl_init();
-    //     $data = [
-    //         "key" => "y7SxblQysDYH0gZMyxoRPRMDzz39kekB",
-    //         "to" => strval($phone),
-    //         "type" => "basic",
-    //         "data" => [
-    //             "content" => [
-    //                 "plainText" => $msg
-    //             ]
-    //         ]
-    //     ];
-    //     curl_setopt_array($curl, [
-    //         CURLOPT_URL => "https://thesmsbuddy.com/api/v1/rcs/send",
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_CUSTOMREQUEST => "POST",
-    //         CURLOPT_POSTFIELDS => json_encode($data),
-    //         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
-    //     ]);
-    //     $response = curl_exec($curl);
-    //     curl_close($curl);
-    //     // echo $response;
-    //     return $response; // ✅ Do this instead of echo
-    // }
 }
