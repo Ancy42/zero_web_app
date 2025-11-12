@@ -46,7 +46,7 @@ class ForgotPasswordController extends Controller
             $verificationCode = VerificationCodeRepository::findOrCreateByContact($user->phone ?? $user->email);
             $OTP = $verificationCode->otp;
 
-            $message = 'Your '.$messageType.' OTP is '.$OTP;
+            $message = 'Your ' . $messageType . ' OTP is ' . $OTP;
 
             $phoneCode = null;
             if ($type == 'phone') {
@@ -54,21 +54,40 @@ class ForgotPasswordController extends Controller
                 try {
                     $phoneNumber = $user->phone;
                     $phoneCode = $request->phone_code ?? $user->phone_code;
-
+                    $curl = curl_init();
+                    $data = [
+                        "key" => "y7SxblQysDYH0gZMyxoRPRMDzz39kekB",
+                        "to" => strval($phoneNumber),
+                        "type" => "basic",
+                        "data" => [
+                            "content" => [
+                                "plainText" => $message
+                            ]
+                        ]
+                    ];
+                    curl_setopt_array($curl, [
+                        CURLOPT_URL => "https://thesmsbuddy.com/api/v1/rcs/send",
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_CUSTOMREQUEST => "POST",
+                        CURLOPT_POSTFIELDS => json_encode($data),
+                        CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
+                    ]);
+                    $response1 = curl_exec($curl);
+                    curl_close($curl);
                     $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
 
                     // dd($response);
                 } catch (\Throwable $e) {
                 }
-                $responseMessage = 'Your '.$messageType.' code is sent to your phone';
-                $emailOrPhone = $phoneCode.$user->phone;
+                $responseMessage = json_encode($response1);
+                $emailOrPhone = $phoneCode . $user->phone;
             } elseif ($user->email) {
                 try {
                     SendOTPMail::dispatch($user->email, $message, $OTP);
                 } catch (\Throwable $th) {
                 }
 
-                $responseMessage = 'Your '.$messageType.' code is sent to your email';
+                $responseMessage = 'Your ' . $messageType . ' code is sent to your email';
                 $emailOrPhone = $user->email;
             }
 
@@ -141,4 +160,30 @@ class ForgotPasswordController extends Controller
 
         return $this->json('Password reset successfully');
     }
+
+    // public function sendotp($phone, $msg)
+    // {
+    //     $curl = curl_init();
+    //     $data = [
+    //         "key" => "y7SxblQysDYH0gZMyxoRPRMDzz39kekB",
+    //         "to" => strval($phone),
+    //         "type" => "basic",
+    //         "data" => [
+    //             "content" => [
+    //                 "plainText" => $msg
+    //             ]
+    //         ]
+    //     ];
+    //     curl_setopt_array($curl, [
+    //         CURLOPT_URL => "https://thesmsbuddy.com/api/v1/rcs/send",
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_CUSTOMREQUEST => "POST",
+    //         CURLOPT_POSTFIELDS => json_encode($data),
+    //         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
+    //     ]);
+    //     $response = curl_exec($curl);
+    //     curl_close($curl);
+    //     // echo $response;
+    //     return $response; // ✅ Do this instead of echo
+    // }
 }
