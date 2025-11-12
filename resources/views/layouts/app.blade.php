@@ -411,21 +411,17 @@
                         @endif
 
                         <!-- storage link -->
-                        @if ($storageLink)
+                        <!-- @if ($storageLink)
                             <div class="alert alert-danger alert-dismissible fade show mb-3 w-100 text-center rounded-0 text-black"
                                 role="alert" style="padding: 10px">
-                                <strong><i class="fa fa-exclamation-circle" data-toggle="tooltip"
-                                        data-placement="bottom"
-                                        title='If you can not install storage link, then image not found.'></i>
-                                    Storage link dose not exist or image not found then</strong> please run <code
-                                    class="text-danger">php artisan
-                                    storage:link</code> or <a href="{{ route('storage.install.index') }}"
-                                    class="btn btn-sm common-btn">
-                                    Click here</a>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                                    id="closeAlert"></button>
+                                <strong><i class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="bottom" title='If you can not install storage link, then image not found.'></i>Storage link dose not exist or image not found then</strong> please run 
+                                <code class="text-danger">php artisan storage:link</code> or 
+                                <a href="#" class="btn btn-sm common-btn">Click here</a> 
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="closeAlert"></button>
                             </div>
-                        @endif
+                        @endif --> 
+                        <!-- href - route('storage.install.index') commented by ancy -->
+                        <!-- /storage link -->
 
                         <!-- subscription warning -->
                         @if (request()->subscription_required && !request()->routeIs('shop.subscription.index'))

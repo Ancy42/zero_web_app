@@ -50,7 +50,7 @@ Route::get('/change-language', function () {
 Route::controller(PassportStorageSupportController::class)->group(function () {
     Route::get('/install-passport', 'index')->name('passport.install.index');
     Route::get('/seeder-run', 'seederRun')->name('seeder.run.index');
-    Route::get('/storage-install', 'storageInstall')->name('storage.install.index');
+    // Route::get('/storage-install', 'storageInstall')->name('storage.install.index');
 });
 
 Route::controller(AuthController::class)->group(function () {
