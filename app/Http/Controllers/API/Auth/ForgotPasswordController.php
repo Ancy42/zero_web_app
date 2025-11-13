@@ -55,19 +55,7 @@ class ForgotPasswordController extends Controller
                     $phoneNumber = $user->phone;
                     $phoneCode = $request->phone_code ?? $user->phone_code;
 
-                    // $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
-
-                    $sms_content = 'OTP for Login on ZEROBUY is ' . $OTP . ' and valid till 5 minutes. Do not share this OTP to anyone for security reasons. -ZEROBUY';
-
-                    $url1 = 'thesmsbuddy.com/api/v1/sms/send?key=y7SxblQysDYH0gZMyxoRPRMDzz39kekB&type=1&to=' . $phoneNumber . '&sender=DRPOOL&message=' . urlencode($sms_content) . '&flash=0&template_id=1707169199056277087';
-                    $response = '';
-                    $ch = curl_init();
-                    curl_setopt_array($ch, array(
-                        CURLOPT_RETURNTRANSFER => 1,
-                        CURLOPT_URL => $url1
-                    ));
-                    $response = curl_exec($ch);
-                    curl_close($ch);
+                    $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
 
                     // dd($response);
                 } catch (\Throwable $e) {

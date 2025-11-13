@@ -38,14 +38,28 @@ class SmsGatewayService
 
     public function sendSMS($phoneCode, $phoneNumber, $message)
     {
-        if (! $this->gateway) {
-            return false;
-        }
+        // if (! $this->gateway) {
+        //     return false;
+        // }
 
-        $to = $phoneCode.$phoneNumber;
+        $to = $phoneCode . $phoneNumber;
 
         // $phoneNumber = '+91'.substr($to, -10);
-        $response = $this->gateway->sendMessage($to, $message);
+        // $response = $this->gateway->sendMessage($to, $message);
+
+
+        // $sms_content = 'OTP for Login on ZEROBUY is ' . $OTP . ' and valid till 5 minutes. Do not share this OTP to anyone for security reasons. -ZEROBUY';
+
+        $url1 = 'thesmsbuddy.com/api/v1/sms/send?key=y7SxblQysDYH0gZMyxoRPRMDzz39kekB&type=1&to=' . $phoneNumber . '&sender=DRPOOL&message=' . urlencode($message) . '&flash=0&template_id=1707169199056277087';
+        $response = '';
+        $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $url1
+        ));
+        $response = curl_exec($ch);
+        curl_close($ch);
+
 
         return $response;
     }
