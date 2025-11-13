@@ -46,7 +46,7 @@ class ForgotPasswordController extends Controller
             $verificationCode = VerificationCodeRepository::findOrCreateByContact($user->phone ?? $user->email);
             $OTP = $verificationCode->otp;
 
-            $message = 'Your '.$messageType.' OTP is '.$OTP;
+            $message = 'Your ' . $messageType . ' OTP is ' . $OTP;
 
             $phoneCode = null;
             if ($type == 'phone') {
@@ -55,20 +55,32 @@ class ForgotPasswordController extends Controller
                     $phoneNumber = $user->phone;
                     $phoneCode = $request->phone_code ?? $user->phone_code;
 
-                    $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
+                    // $response = (new SmsGatewayService)->sendSMS($phoneCode, $phoneNumber, $message);
+
+                    $sms_content = 'OTP for Login on DREAMPOOL is ' . $OTP . ' and valid till 5 minutes. Do not share this OTP to anyone for security reasons. -Dreampool';
+
+                    $url1 = 'thesmsbuddy.com/api/v1/sms/send?key=y7SxblQysDYH0gZMyxoRPRMDzz39kekB&type=1&to=' . $phoneNumber . '&sender=DRPOOL&message=' . urlencode($sms_content) . '&flash=0&template_id=1707169199056277087';
+                    $response = '';
+                    $ch = curl_init();
+                    curl_setopt_array($ch, array(
+                        CURLOPT_RETURNTRANSFER => 1,
+                        CURLOPT_URL => $url1
+                    ));
+                    $response = curl_exec($ch);
+                    curl_close($ch);
 
                     // dd($response);
                 } catch (\Throwable $e) {
                 }
-                $responseMessage = 'Your '.$messageType.' code is sent to your phone';
-                $emailOrPhone = $phoneCode.$user->phone;
+                $responseMessage = 'Your ' . $messageType . ' code is sent to your phone';
+                $emailOrPhone = $phoneCode . $user->phone;
             } elseif ($user->email) {
                 try {
                     SendOTPMail::dispatch($user->email, $message, $OTP);
                 } catch (\Throwable $th) {
                 }
 
-                $responseMessage = 'Your '.$messageType.' code is sent to your email';
+                $responseMessage = 'Your ' . $messageType . ' code is sent to your email';
                 $emailOrPhone = $user->email;
             }
 
