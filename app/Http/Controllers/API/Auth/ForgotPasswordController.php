@@ -151,6 +151,7 @@ class ForgotPasswordController extends Controller
 
         $verifyOTP->delete();
 
+        
         return $this->json('Password reset successfully');
     }
 }
