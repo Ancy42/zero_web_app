@@ -163,7 +163,7 @@ return [
     'product' => 'Ready Grocery', // which product you verify same as supported server
     'productId' => 60154192,
     'admin_role' => 'root',
-    'verify_code' => '1ZSrm/fAmszsB+FDhXKh0EdSeERKWkVDSGRqWW51WHBsNG5NMTlYbnFJVjBDd01PMmp6T2FubHFscy9zK2NTTEsrQlVjSnNrZE9CYmRQUXlzWk5NL01ubmlkbnVlZFliWnlOaXRRPT0=',
+    'verify_code' => 'Tg49OTUM4f8ZRgFJ4kPadHVHeW16enJHbWVkcVQzWWJlTTc2NE5YMi9IYlFFeFhpaHhlNHBTWkN2a091ejg5QWowSTZLZ1J6aVhSZGpGN3UrVURnZm5UNzVIdThTbVNFTG5sV0l3PT0=',
     'verify_purchase' => true,
     'verify_rules' => [
         'email' => [

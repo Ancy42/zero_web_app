@@ -51,7 +51,7 @@ class ShopController extends Controller
      */
     public function show($slug)
     {
-        $shop=Shop::where('id', $slug)->first();
+        $shop=Shop::where('slug', $slug)->first();
         return $this->json('shop details', [
             'shop' => ShopDetailsResource::make($shop),
         ]);

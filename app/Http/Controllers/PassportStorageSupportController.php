@@ -29,14 +29,14 @@ class PassportStorageSupportController extends Controller
         }
     }
 
-    // public function storageInstall()
-    // {
-    //     try {
-    //         Artisan::call('storage:link');
+    public function storageInstall()
+    {
+        try {
+            Artisan::call('storage:link');
 
-    //         return back()->with('success', 'Storage linked is successfully.');
-    //     } catch (\Throwable $th) {
-    //         return back()->with('error', 'Storage not linked because '.$th->getMessage());
-    //     }
-    // }
+            return back()->with('success', 'Storage linked is successfully.');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Storage not linked because '.$th->getMessage());
+        }
+    }
 }

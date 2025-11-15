@@ -218,38 +218,9 @@ if (! function_exists('currencyData')) {
      *
      * @param  float  $amount
      */
-    // function currencyData($input)
-    // {
-    //     if (!$input) {
-    //         return null;
-    //     }
-
-    //     // if object -> extract currency_id, otherwise assume it's the id already
-    //     $currencyId = is_object($input) ? ($input->currency_id ?? null) : $input;
-
-    //     if (!$currencyId) {
-    //         return null;
-    //     }
-
-    //     $currency = Currency::find($currencyId);
-
-    //     if (!$currency) {
-    //         return null;
-    //     }
-
-    //     return [
-    //         'id'     => $currency->id,
-    //         'symbol' => $currency->symbol,
-    //         'rate'   => $currency->rate,
-    //     ];
-    // }
-
     function currencyData($id)
     {
         $currency = Currency::find($id);
-        if(!$currency) {
-            $currency = Currency::first();
-        }
 
         return  [
             'id' => $currency->id,

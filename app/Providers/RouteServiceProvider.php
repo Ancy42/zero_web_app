@@ -17,35 +17,17 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
     public function boot(): void
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
-        });
-
         $this->routes(function () {
-            // API routes
-            Route::middleware('api')->prefix('api')->group(base_path('routes/api.php'));
-
-            // Rider routes
-            Route::middleware('api')->prefix('api')->group(base_path('routes/rider.php'));
-
-            // Rider routes
-            Route::middleware('api')->prefix('api')->group(base_path('routes/seller.php'));
-
-            // Shop routes
-            Route::middleware(['web', 'chack_root_user'])->prefix('shop')->group(base_path('routes/shop.php'));
-
-            // Admin routes
-            Route::middleware(['web', 'chack_root_user'])->prefix('admin')->group(base_path('routes/admin.php'));
-
-            // Web routes
-            Route::middleware(['web', 'chack_root_user'])->group(base_path('routes/web.php'));
+            Route::get('/', function(){
+                return redirect()->route('installer.welcome.index');
+            });
         });
     }
 }

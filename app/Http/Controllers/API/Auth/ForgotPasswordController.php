@@ -46,7 +46,7 @@ class ForgotPasswordController extends Controller
             $verificationCode = VerificationCodeRepository::findOrCreateByContact($user->phone ?? $user->email);
             $OTP = $verificationCode->otp;
 
-            $message = 'Your ' . $messageType . ' OTP is ' . $OTP;
+            $message = 'Your '.$messageType.' OTP is '.$OTP;
 
             $phoneCode = null;
             if ($type == 'phone') {
@@ -60,15 +60,15 @@ class ForgotPasswordController extends Controller
                     // dd($response);
                 } catch (\Throwable $e) {
                 }
-                $responseMessage = 'Your ' . $messageType . ' code is sent to your phone';
-                $emailOrPhone = $phoneCode . $user->phone;
+                $responseMessage = 'Your '.$messageType.' code is sent to your phone';
+                $emailOrPhone = $phoneCode.$user->phone;
             } elseif ($user->email) {
                 try {
                     SendOTPMail::dispatch($user->email, $message, $OTP);
                 } catch (\Throwable $th) {
                 }
 
-                $responseMessage = 'Your ' . $messageType . ' code is sent to your email';
+                $responseMessage = 'Your '.$messageType.' code is sent to your email';
                 $emailOrPhone = $user->email;
             }
 

@@ -1,0 +1,18 @@
+{
+    "id": 60600854,
+    "name": "Purchase",
+    "alias": "purchase",
+    "author": "RazinSoft",
+    "author_url": "https://razinsoft.com",
+    "display_name": "Purchase Extension",
+    "description": "Purchase Extension - Advanced Stock & Inventory Management for ReadyCommerce & ReadyGrocery",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Purchase\\App\\Providers\\PurchaseServiceProvider"
+    ],
+    "version": "1.0.0",
+    "image": "/modules/purchase/icon.jpg",
+    "is_verified": true,
+    "license_key": ""
+}
