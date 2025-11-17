@@ -4,7 +4,7 @@
         href="{{ route('admin.dashboard.index') }}">
         <span>
             <img class="menu-icon" src="{{ asset('assets/icons-admin/overview.svg') }}" alt="icon" loading="lazy" />
-            {{ __('Overview') }}
+            {{ __('Dashboard') }}
         </span>
     </a>
 </li>
@@ -13,7 +13,7 @@
    use \Nwidart\Modules\Facades\Module;
 @endphp
 
-
+<!----------------------------------------------------- Point Of Sale ----------------------------------------------------->
 @hasPermission(['shop.pos.index', 'shop.pos.draft', 'shop.pos.sales'])
     <li class="menu-divider">
         <span class="menu-title">{{ __('Point Of Sale') }}</span>
@@ -52,15 +52,16 @@
         </div>
     </li>
 @endhasPermission
+<!----------------------------------------------------- /End Point Of Sale/ ----------------------------------------------------->
 
 
+<!----------------------------------------------------- Online Orders ----------------------------------------------------->
 @hasPermission('admin.order.index')
     <li class="menu-divider">
         <span class="menu-title">{{ __(' Online Orders') }}</span>
         <div class="devider_line"></div>
     </li>
 
-    <!--- Orders --->
     <li>
         <a class="menu {{ $request->routeIs('admin.order.*') ? 'active' : '' }}" href="{{ route('admin.order.index') }}">
             <span>
@@ -70,7 +71,10 @@
         </a>
     </li>
 @endhasPermission
+<!----------------------------------------------------- /End Online Orders/ ----------------------------------------------------->
 
+
+<!----------------------------------------------------- Product Management ----------------------------------------------------->
 @hasPermission(['admin.category.index', 'admin.product.index', 'admin.brand.index'])
     <li class="menu-divider">
         <span class="menu-title">{{ __('Product Management') }}</span>
@@ -78,8 +82,8 @@
     </li>
 @endhasPermission
 
+<!-- Products Management -->
 @hasPermission(['shop.product.index', 'shop.product.create', 'admin.product.index', 'shop.product.trashedList'])
-    <!--- Products--->
     <li>
         <a class="menu {{ request()->routeIs('shop.product.*', 'admin.product.index') ? 'active' : '' }}"
             data-bs-toggle="collapse" href="#productMenu">
@@ -145,8 +149,8 @@
     @include('purchase::layouts.purchaseSidebar')
 @endif
 
+<!-- Categories -->
 @hasPermission('admin.category.index')
-    <!--- categories--->
     <li>
         <a class="menu {{ $request->routeIs('admin.category.*') ? 'active' : '' }}"
             href="{{ route('admin.category.index') }}">
@@ -159,6 +163,7 @@
     </li>
 @endhasPermission
 
+<!-- Attributes -->
 @hasPermission(['admin.categoryAttribute.index'])
     <li>
         <a class="menu {{ $request->routeIs('admin.categoryAttribute.*') ? 'active' : '' }}"
@@ -172,8 +177,8 @@
     </li>
 @endhasPermission
 
+<!-- Brands -->
 @hasPermission('admin.brand.index')
-    <!--- brand --->
     <li>
         <a class="menu {{ $request->routeIs('admin.brand.*') ? 'active' : '' }}" href="{{ route('admin.brand.index') }}">
             <span>
@@ -183,25 +188,19 @@
         </a>
     </li>
 @endhasPermission
+<!----------------------------------------------------- /End Product Management/ ----------------------------------------------------->
 
 
-
-@hasPermission([
-    'admin.flashSale.index',
-    'admin.flashSale.create',
-    'admin.ad.index',
-    'admin.ad.create',
-    'admin.coupon.index',
-    'admin.coupon.create'
-])
+<!----------------------------------------------------- Sales Management ----------------------------------------------------->
+@hasPermission([ 'admin.flashSale.index', 'admin.flashSale.create', 'admin.ad.index', 'admin.ad.create', 'admin.coupon.index', 'admin.coupon.create'])
     <li class="menu-divider">
         <span class="menu-title">{{ __('Sale Management') }}</span>
         <div class="devider_line"></div>
     </li>
 @endhasPermission
 
+<!-- Flash Sales -->
 @hasPermission(['admin.flashSale.index', 'admin.flashSale.create'])
-    <!--- flash sale --->
     <li>
         <a class="menu {{ request()->routeIs('admin.flashSale.*', 'shop.flashSale.show') ? 'active' : '' }}"
             data-bs-toggle="collapse" href="#flashSaleMenu">
@@ -232,13 +231,8 @@
     </li>
 @endhasPermission
 
-
-
-
-
-
+<!-- Adds -->
 @hasPermission(['admin.ad.index', 'admin.ad.create'])
-    <!--- ads--->
     <li>
         <a class="menu {{ request()->routeIs('admin.ad.*') ? 'active' : '' }}" data-bs-toggle="collapse" href="#adMenu">
             <span>
@@ -265,8 +259,9 @@
         </div>
     </li>
 @endhasPermission
+
+<!-- Coupon -->
 @hasPermission(['admin.coupon.index', 'admin.coupon.create'])
-    <!--- coupon--->
     <li>
         <a class="menu {{ request()->routeIs('admin.coupon.*') ? 'active' : '' }}" data-bs-toggle="collapse"
             href="#couponMenu">
@@ -296,8 +291,9 @@
         </div>
     </li>
 @endhasPermission
+
+<!-- Push Notification -->
 @hasPermission('admin.customerNotification.index')
-    <!--- notification--->
     <li>
         <a class="menu {{ $request->routeIs('admin.customerNotification.*') ? 'active' : '' }}"
             href="{{ route('admin.customerNotification.index') }}">
@@ -309,6 +305,8 @@
         </a>
     </li>
 @endhasPermission
+
+<!-- Blogs -->
 @hasPermission(['admin.blog.index', 'admin.blog.create'])
     <li>
         <a class="menu {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}" data-bs-toggle="collapse"
@@ -338,19 +336,19 @@
         </div>
     </li>
 @endhasPermission
+<!----------------------------------------------------- /End Sales Management/ ----------------------------------------------------->
+
+
+<!----------------------------------------------------- Vendor Management ----------------------------------------------------->
 @if ($businessModel == 'multi')
-    @hasPermission([
-        'admin.shop.index',
-        'admin.shop.create',
-        'admin.subscription-plan.index',
-        'admin.subscription-plan.create'
-    ])
+    @hasPermission([ 'admin.shop.index', 'admin.shop.create', 'admin.subscription-plan.index', 'admin.subscription-plan.create' ])
         <li class="menu-divider">
             <span class="menu-title">{{ __('Vendor management') }}</span>
             <div class="devider_line"></div>
         </li>
     @endhasPermission
 
+    <!-- Vendors -->
     @hasPermission(['admin.shop.index', 'admin.shop.create'])
         <!--- shop management--->
         <li>
@@ -390,6 +388,7 @@
         </li>
     @endhasPermission
 
+    <!-- Subscription -->
     @hasPermission(['admin.subscription-plan.index', 'admin.subscription-plan.create'])
         <!--- subscription plans --->
         <li>
@@ -422,13 +421,11 @@
         </li>
     @endhasPermission
 @endif
+<!----------------------------------------------------- /End Vendor Management/ ----------------------------------------------------->
 
-@hasPermission([
-    'admin.supportTicket.index',
-    'admin.support.index',
-    'admin.whatsAppChat.index',
-    'shop.customer.chat.index'
-])
+
+<!----------------------------------------------------- Messages ----------------------------------------------------->
+@hasPermission([ 'admin.supportTicket.index', 'admin.support.index', 'admin.whatsAppChat.index', 'shop.customer.chat.index' ])
     <!--- Conversations --->
     <li class="menu-divider">
         <span class="menu-title">{{ __('Messages') }}</span>
@@ -436,6 +433,7 @@
     </li>
 @endhasPermission
 
+<!-- Live Messages -->
 @hasPermission('shop.customer.chat.index')
     <li>
         <a class="menu {{ $request->routeIs('shop.customer.chat.index') ? 'active' : '' }}"
@@ -453,6 +451,7 @@
     </li>
 @endhasPermission
 
+<!-- WhatsApp -->
 @hasPermission('admin.whatsAppChat.index')
     <li>
         <a class="menu {{ $request->routeIs('admin.whatsAppChat.index') ? 'active' : '' }}"
@@ -470,6 +469,7 @@
     </li>
 @endhasPermission
 
+<!-- Customer Query -->
 @hasPermission(['admin.supportTicket.index'])
     <!--- Help Requests --->
     <li>
@@ -484,6 +484,7 @@
     </li>
 @endhasPermission
 
+<!-- Notes -->
 @hasPermission(['admin.support.index'])
     <!--- Help Notes --->
     <li>
@@ -497,7 +498,10 @@
         </a>
     </li>
 @endhasPermission
+<!----------------------------------------------------- /End Mesages/ ----------------------------------------------------->
 
+
+<!----------------------------------------------------- Users Management ----------------------------------------------------->
 @hasPermission(['admin.rider.index', 'admin.customer.index', 'admin.employee.index', 'admin.role.index'])
     <li class="menu-divider">
         <span class="menu-title">{{ __('User Management') }}</span>
@@ -508,6 +512,8 @@
 @if (module_exists('purchase') )
     @include('purchase::layouts.supplierSidebar')
 @endif
+
+<!-- Drivers -->
 @hasPermission(['admin.rider.index', 'admin.rider.create'])
     <li>
         <a class="menu {{ request()->routeIs('admin.rider.*') ? 'active' : '' }}" data-bs-toggle="collapse"
@@ -539,6 +545,7 @@
     </li>
 @endhasPermission
 
+<!-- Customers -->
 @hasPermission(['admin.customer.index', 'admin.customer.create'])
     <li>
         <a class="menu {{ request()->routeIs('admin.customer.*') ? 'active' : '' }}" data-bs-toggle="collapse"
@@ -570,6 +577,8 @@
     </li>
 
 @endhasPermission
+
+<!-- Moderators -->
 @hasPermission(['admin.employee.index', 'admin.employee.create'])
 
     <li>
@@ -601,28 +610,18 @@
         </div>
     </li>
 @endhasPermission
-@hasPermission([
-    'admin.generale-setting.index',
-    'admin.business-setting.index',
-    'admin.socialLink.index',
-    'admin.themeColor.index',
-    'admin.deliveryCharge.index',
-    'admin.ticketIssueType.index',
-    'admin.contactUs.index',
-    'admin.pusher.index',
-    'admin.mailConfig.index',
-    'admin.paymentGateway.index',
-    'admin.sms-gateway.index',
-    'admin.firebase.index',
-    'admin.verification.index',
-    'admin.role.index'
-])
+<!----------------------------------------------------- /End Users Management/ ----------------------------------------------------->
+
+
+<!----------------------------------------------------- Settings ----------------------------------------------------->
+@hasPermission([ 'admin.generale-setting.index', 'admin.business-setting.index', 'admin.socialLink.index', 'admin.themeColor.index', 'admin.deliveryCharge.index', 'admin.ticketIssueType.index', 'admin.contactUs.index', 'admin.pusher.index', 'admin.mailConfig.index', 'admin.paymentGateway.index', 'admin.sms-gateway.index', 'admin.firebase.index', 'admin.verification.index', 'admin.role.index' ])
     <li class="menu-divider">
         <span class="menu-title">{{ __('Settings') }}</span>
         <div class="devider_line"></div>
     </li>
 @endhasPermission
 
+<!-- My Profile -->
 @if ($businessModel != 'single')
     @hasPermission(['shop.profile.index'])
         <!--- Profile --->
@@ -639,12 +638,8 @@
     @endhasPermission
 @endif
 
-@hasPermission([
-    'admin.business-setting.index',
-    'admin.deliveryCharge.index',
-    'admin.vatTax.index',
-    'admin.currency.index'
-])
+<!-- Business Settings -->
+@hasPermission([ 'admin.business-setting.index', 'admin.deliveryCharge.index', 'admin.vatTax.index', 'admin.currency.index' ])
     <!---Business Settings --->
     <li>
         <a class="menu {{ request()->routeIs('admin.business-setting.*', 'admin.deliveryCharge.*', 'admin.vatTax.*', 'admin.currency.*') ? 'active' : '' }}"
@@ -689,16 +684,8 @@
     </li>
 @endhasPermission
 
-<!--- third party configuration --->
-@hasPermission([
-    'admin.pusher.index',
-    'admin.mailConfig.index',
-    'admin.paymentGateway.index',
-    'admin.sms-gateway.index',
-    'admin.firebase.index',
-    'admin.googleReCaptcha.index',
-    'admin.aiPrompt.configure'
-])
+<!--- Configure Dependence--third party configuration --->
+@hasPermission([ 'admin.pusher.index', 'admin.mailConfig.index', 'admin.paymentGateway.index', 'admin.sms-gateway.index', 'admin.firebase.index', 'admin.googleReCaptcha.index', 'admin.aiPrompt.configure' ])
     <li>
         <a class="menu {{ request()->routeIs('admin.socialAuth.*', 'admin.pusher.*', 'admin.mailConfig.*', 'admin.paymentGateway.*', 'admin.sms-gateway.*', 'admin.firebase.*', 'admin.googleReCaptcha.*', 'admin.aiPrompt.configure') ? 'active' : '' }}"
             data-bs-toggle="collapse" href="#thirdPartConfig" title="Third Party configuration">
@@ -771,6 +758,7 @@
     </li>
 @endhasPermission
 
+<!-- Appearance -->
 @hasPermission(['admin.banner.index', 'admin.themeColor.index'])
     <!--- Settings --->
     <li>
@@ -802,6 +790,8 @@
         </div>
     </li>
 @endhasPermission
+
+<!-- Import/Export -->
 @hasPermission(['shop.bulk-product-export.index', 'shop.bulk-product-import.index', 'shop.gallery.index'])
     <!--- Import / Export --->
     <li>
@@ -839,7 +829,8 @@
         </div>
     </li>
 @endhasPermission
-<!--- cms --->
+
+<!--- Manage Content--cms --->
 @hasPermission(['admin.menu.index', 'admin.page.index', 'admin.footer.index'])
     <li>
         <a class="menu {{ request()->routeIs('admin.menu.index*', 'admin.page.*', 'admin.footer.*') ? 'active' : '' }}"
@@ -880,16 +871,8 @@
     </li>
 @endhasPermission
 
-@hasPermission([
-    'admin.generale-setting.index',
-    'admin.socialLink.index',
-    'admin.ticketIssueType.index',
-    'admin.verification.index',
-    'admin.contactUs.index',
-    'admin.country.index',
-    'admin.role.index',
-    'admin.aiPrompt.index'
-])
+<!-- System Settings -->
+@hasPermission([ 'admin.generale-setting.index', 'admin.socialLink.index', 'admin.ticketIssueType.index', 'admin.verification.index', 'admin.contactUs.index', 'admin.country.index', 'admin.role.index', 'admin.aiPrompt.index' ])
     <!--- Settings --->
     <li>
         <a class="menu {{ request()->routeIs('admin.generale-setting.*', 'admin.socialLink.*', 'admin.ticketIssueType.*', 'admin.verification.*', 'admin.contactUs.*', 'admin.country.*', 'admin.role.*', 'admin.aiPrompt.index', 'admin.language.*') ? 'active' : '' }}"
@@ -965,4 +948,6 @@
         </div>
     </li>
 @endhasPermission
+<!----------------------------------------------------- /End Settings/ ----------------------------------------------------->
+
 
